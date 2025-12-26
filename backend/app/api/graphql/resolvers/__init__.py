@@ -1,0 +1,2 @@
+"""GraphQL resolvers package."""
+

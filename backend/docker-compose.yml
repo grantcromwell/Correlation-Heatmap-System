@@ -1,0 +1,54 @@
+services:
+  postgres:
+    image: timescale/timescaledb:latest-pg15
+    container_name: corheatmap-postgres
+    environment:
+      POSTGRES_USER: corheatmap
+      POSTGRES_PASSWORD: corheatmap
+      POSTGRES_DB: corheatmap
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U corheatmap"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: corheatmap-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  temporal:
+    image: temporalio/auto-setup:latest
+    container_name: corheatmap-temporal
+    ports:
+      - "7233:7233"
+      - "8088:8088"
+    environment:
+      - DB=postgresql
+      - DB_PORT=5432
+      - POSTGRES_USER=corheatmap
+      - POSTGRES_PWD=corheatmap
+      - POSTGRES_SEEDS=postgres
+      - DYNAMIC_CONFIG_FILE_PATH=config/dynamicconfig/development-sql.yaml
+    depends_on:
+      - postgres
+    volumes:
+      - temporal_data:/var/lib/temporal
+
+volumes:
+  postgres_data:
+  redis_data:
+  temporal_data:
+
