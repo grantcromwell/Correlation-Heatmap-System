@@ -45,6 +45,41 @@ This project implements a comprehensive correlation analysis platform that:
 - Detects correlation decoupling events
 - Utilizes H3 geospatial indexing for efficient correlation clustering
 
+
+## Architecture
+
+- **Backend**: FastAPI + PostgreSQL + TimescaleDB + Redis + Temporal
+- **Frontend**: React + TypeScript + Vite + Tailwind CSS
+- **Data Sources**: Alpha Vantage, Finnhub, yfinance
+- **Features**: Correlation analysis, backtesting, decoupling detection, H3 clustering
+
+
+## Project Structure
+
+
+CorHeatmap/
+├── backend/              # FastAPI backend application
+│   ├── app/             # Application source code
+│   │   ├── api/         # API endpoints and routes
+│   │   ├── services/    # Business logic services
+│   │   ├── models/      # Data models
+│   │   ├── repositories/# Data access layer
+│   │   └── workflows/   # Temporal workflows
+│   ├── alembic/         # Database migrations
+│   ├── tests/           # Test suite
+│   └── requirements.txt # Python dependencies
+├── frontend/            # React frontend application
+│   ├── src/
+│   │   ├── features/    # Feature modules
+│   │   ├── shared/      # Shared components and utilities
+│   │   └── tests/       # Test files
+│   └── package.json     # Node.js dependencies
+├── setup.py             # Python setup script
+├── setup.sh             # Bash setup script
+├── LICENSE              # MIT License
+└── README.md            # Project documentation
+
+
 ## Quick Start
 
 ### Prerequisites
@@ -146,13 +181,6 @@ Optional (defaults provided):
 - **Frontend**: http://localhost:5173
 - **Temporal UI**: http://localhost:8088
 
-## Architecture
-
-- **Backend**: FastAPI + PostgreSQL + TimescaleDB + Redis + Temporal
-- **Frontend**: React + TypeScript + Vite + Tailwind CSS
-- **Data Sources**: Alpha Vantage, Finnhub, yfinance
-- **Features**: Correlation analysis, backtesting, decoupling detection, H3 clustering
-
 ## Development
 
 ### Backend
@@ -185,31 +213,6 @@ npm run lint
 npm run test:unit
 ```
 
-## Project Structure
-
-```
-CorHeatmap/
-├── backend/              # FastAPI backend application
-│   ├── app/             # Application source code
-│   │   ├── api/         # API endpoints and routes
-│   │   ├── services/    # Business logic services
-│   │   ├── models/      # Data models
-│   │   ├── repositories/# Data access layer
-│   │   └── workflows/   # Temporal workflows
-│   ├── alembic/         # Database migrations
-│   ├── tests/           # Test suite
-│   └── requirements.txt # Python dependencies
-├── frontend/            # React frontend application
-│   ├── src/
-│   │   ├── features/    # Feature modules
-│   │   ├── shared/      # Shared components and utilities
-│   │   └── tests/       # Test files
-│   └── package.json     # Node.js dependencies
-├── setup.py             # Python setup script
-├── setup.sh             # Bash setup script
-├── LICENSE              # MIT License
-└── README.md            # Project documentation
-```
 
 ## Technology Stack
 
